@@ -1,27 +1,4 @@
-use rust_gpiozero::output_devices::PWMOutputDevice;
-
-struct Motor(PWMOutputDevice, PWMOutputDevice);
-
-impl Motor {
-    pub fn new(first : u8, second : u8) -> Self {
-        Self (PWMOutputDevice::new(first), PWMOutputDevice::new(second))
-    }
-
-    pub fn forward(&mut self) {
-        self.0.on();
-        self.1.off();
-    }
-
-    pub fn backward(&mut self) {
-        self.0.off();
-        self.1.on();
-    }
-    
-    pub fn stop(&mut self) {
-        self.0.off();
-        self.0.off();
-    }
-}
+use rust_gpiozero::output_devices::Motor;
 
 fn main() {
     let mut motor1 = Motor::new(14, 15);
@@ -54,23 +31,25 @@ fn main() {
                 motor2.backward();
             },
             'b' => {
-                motor1.stop();
-                motor2.stop();
+                stop_motor(&mut motor1, &mut motor2);
                 break;
             },
             _ => {
-                motor1.stop();
-                motor2.stop();
+                stop_motor(&mut motor1, &mut motor2);
             },
         };
     }
+}
+
+pub fn stop_motor(m1 : &mut Motor, m2 : &mut Motor) {
+    m1.stop();
+    m2.stop();
 }
 
 pub fn get_first_byte() -> char {
     let mut input = String::new();
     let _ = std::io::stdin()
         .read_line(&mut input)
-        .ok()
         .expect("Could not get stdin input.");
     input.chars().next().unwrap()
 }
