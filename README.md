@@ -27,7 +27,7 @@ This car is controlled by ssh and drives through the use of keys being inputted 
 3. Execute this below script to download and compile the necessary:
 ```
 git clone https://github.com/mich2000/raspi-car;
-cd raspi-car/raspi-car;
+cd raspi-car;
 cargo build --release;
 ```
 4. Go in the rust raspi-car project and execute: `target/release/raspi-car`
