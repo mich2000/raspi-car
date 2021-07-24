@@ -6,27 +6,19 @@ fn main() {
     loop {
         let input_char = get_first_byte();
         match input_char {
-            'a' => {
-                motor1.backward();
-                motor2.stop();
-            },
-            'e' => {
-                motor1.stop();
-                motor2.backward();
-            },
-            'd' => {
+            '6' => {
                 motor1.forward();
                 motor2.stop();
             },
-            'q' => {
+            '4' => {
                 motor2.forward();
                 motor1.stop();
             },
-            'z' => {
+            '8' => {
                 motor1.forward();
                 motor2.forward();
             },
-            's' => {
+            '5' => {
                 motor1.backward();
                 motor2.backward();
             },
@@ -34,19 +26,37 @@ fn main() {
                 stop_motor(&mut motor1, &mut motor2);
                 break;
             },
-            _ => {
+            'h' => {
                 stop_motor(&mut motor1, &mut motor2);
+                print_help();   
             },
+            _ => stop_motor(&mut motor1, &mut motor2)
         };
     }
 }
 
-pub fn stop_motor(m1 : &mut Motor, m2 : &mut Motor) {
+fn stop_motor(m1 : &mut Motor, m2 : &mut Motor) {
     m1.stop();
     m2.stop();
 }
 
-pub fn get_first_byte() -> char {
+fn print_help() {
+    println!("+=============== RASPIAN MINI-CAR ======================+");
+    println!("| motor1 => gpio 14 & 15                                |");
+    println!("| motor2 => gpio 23 & 24                                |");
+    println!("+=============== HELP ==================================+");
+    println!("| Input keys                                            |");
+    println!("| 8 => go forward                                       |");
+    println!("| 5 => go backward                                      |");
+    println!("| 6 => go to the right                                  |");
+    println!("| 4 => go to the left                                   |");
+    println!("| b => stops the car and quit the program               |");
+    println!("| h => prints helps instructions                        |");
+    println!("| everything else than the above keys will stop the car |");
+    println!("+=======================================================+");
+}
+
+fn get_first_byte() -> char {
     let mut input = String::new();
     let _ = std::io::stdin()
         .read_line(&mut input)
