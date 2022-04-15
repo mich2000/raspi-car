@@ -44,6 +44,8 @@ fn print_help() {
     println!("+=============== RASPIAN MINI-CAR ======================+");
     println!("| motor1 => gpio 14 & 15                                |");
     println!("| motor2 => gpio 23 & 24                                |");
+    println!("| corresponding pins for motor1 should be switched,     |");
+    println!("| because one of the motors is in a reverse position.   |");
     println!("+=============== HELP ==================================+");
     println!("| Input keys                                            |");
     println!("| 8 => go forward                                       |");
