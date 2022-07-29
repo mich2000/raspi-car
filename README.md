@@ -1,18 +1,18 @@
 # The raspi-car
 
-Mini car controlled by a raspberry pi with 2 motors on either side.
+Mini car controlled by a raspberry pi with 2 motors on either side so that you can see it rolling.
 
 This car is controlled by ssh and drives through the use of keys being inputted by the standard input.
 
 ## What is needed?
 
-* raspberry pi 4
+* raspberry pi 4 with raspbian installed on
 * motor controller. ex. drv8833
 * 2 DC motors. ex. MOT-TT-90:1
 * 4 male to female jump wires
 * 6 male to male jump wires
 * 1 breadboard
-* 2.7 - 10.8 V battery or equivalent(If the battery exceeds the voltage you can use a voltage divider or zenerdiode to reduce this.)
+* 2.7 - 10.8 V battery or equivalent(If the battery exceeds the voltage you can use a voltage divider setup or zenerdiode to reduce this.)
 * Electric cable for raspberry pi or powerbank with an output of at least 2.1 mAH to give it enough juice.
 
 ## Setup raspberry pi
@@ -36,9 +36,10 @@ cargo build --release;
 
 ## Power-saving techniques for raspberry pi 4
 
+These tips are only usable on raspbian linux for a raspberry pi 4.
+
 * Disable hdmi: `/usr/bin/tvservice -o`
 * Disable power led on the raspberry pi: `su -c 'echo 0 > /sys/class/leds/led1/brightness' root`
-
 * Enable hdmi: `/usr/bin/tvservice -p`
 * Enable power led on the raspberry pi: `su -c 'echo 255 > /sys/class/leds/led1/brightness' root`
 
@@ -46,4 +47,4 @@ cargo build --release;
 
 * Use hotspot of computer that has a wifi and hotspot capability, so you don't even need an intermediate wifi.
 * Build a 3d-printed encasing for more efficiency and more beautifull result.
-* Use raspberry pi zero series board for smaller footprint and lower weight, just make sure there is a possibility to get wifi on it.
+* Use raspberry pi zero series board for smaller footprint and lower weight, just make sure there is a possibility to get wifi on it for the ssh connection.
